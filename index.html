@@ -197,12 +197,12 @@
     position: absolute;
     right: 0; top: 68px; bottom: 0;
     width: 54%;
-    display: flex;
-    align-items: flex-end;
     overflow-x: auto;
     overflow-y: hidden;
     z-index: 1;
-    /* スクロールバーを非表示（見た目スッキリ） */
+    display: flex;
+    align-items: flex-end;
+    /* スクロールバーを非表示 */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -214,21 +214,23 @@
     display: flex;
     align-items: flex-end;
     height: 100%;
-    /* 4人分の幅を確保 */
+    /* 4人分の幅を確保・左端からきっちり表示 */
     min-width: max-content;
-    padding-bottom: 0;
+    flex-shrink: 0;
   }
 
   .hero-char {
-    height: 90vh;
+    height: 88vh;
     width: auto;
+    max-width: 260px;
     object-fit: contain;
     object-position: bottom center;
     filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12));
     transition: transform 0.4s, filter 0.4s;
-    margin: 0 -16px;
+    margin: 0 -12px;
     position: relative;
     display: block;
+    flex-shrink: 0;
   }
   .hero-char:hover {
     transform: scale(1.05) translateY(-10px);
@@ -518,16 +520,17 @@
   </div>
 
   <!-- ▼ キャラクターエリア：4人 + 横スクロール対応 -->
+  <!-- 既存のsia・hakuを左側に表示。右にスクロールするとairi・shionが現れる -->
   <div class="hero-right">
     <div class="hero-characters">
-      <div class="char-wrap airi">
-        <img class="hero-char" src="airi.webp" alt="椛屋あいり">
-      </div>
       <div class="char-wrap sia">
         <img class="hero-char" src="sia.webp" alt="シア">
       </div>
       <div class="char-wrap haku">
         <img class="hero-char" src="haku.webp" alt="ハク">
+      </div>
+      <div class="char-wrap airi">
+        <img class="hero-char" src="airi.webp" alt="椛屋あいり">
       </div>
       <div class="char-wrap shion">
         <img class="hero-char" src="shion.webp" alt="時影しおん">
