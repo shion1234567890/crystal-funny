@@ -695,5 +695,55 @@
   <p class="footer-note">© 2025 Crystal funny. All rights reserved.</p>
 </footer>
 
+<script>
+  // 3秒後に自動スクロール開始、端まで行ったら折り返す
+  (function() {
+    const container = document.querySelector('.hero-right');
+    if (!container) return;
+
+    let direction = 1;       // 1=右へ, -1=左へ
+    let speed = 1.2;         // px/フレーム
+    let autoScroll = true;
+    let startTimer = null;
+
+    // 3秒後にスクロール開始
+    startTimer = setTimeout(function() {
+      requestAnimationFrame(tick);
+    }, 3000);
+
+    function tick() {
+      if (!autoScroll) {
+        requestAnimationFrame(tick);
+        return;
+      }
+
+      container.scrollLeft += speed * direction;
+
+      const maxScroll = container.scrollWidth - container.clientWidth;
+
+      // 右端に到達したら左へ折り返す
+      if (container.scrollLeft >= maxScroll - 1) {
+        direction = -1;
+      }
+      // 左端に到達したら右へ折り返す
+      if (container.scrollLeft <= 1) {
+        direction = 1;
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    // マウスが乗っている間は一時停止
+    container.addEventListener('mouseenter', function() { autoScroll = false; });
+    container.addEventListener('mouseleave', function() { autoScroll = true; });
+
+    // タッチ操作中も一時停止
+    container.addEventListener('touchstart', function() { autoScroll = false; });
+    container.addEventListener('touchend', function() {
+      setTimeout(function() { autoScroll = true; }, 2000);
+    });
+  })();
+</script>
+
 </body>
 </html>
